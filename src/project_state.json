@@ -1,0 +1,47 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 3,
+  "summary": "New project",
+  "architectural_notes": [
+    "Domain/subdomain values must be normalized to a URL-safe slug (letters, numbers, hyphens only; no spaces) and validated before deployment."
+  ],
+  "known_issues": [
+    "App not accessible when an invalid domain containing spaces (e.g., \"ai master\") is used; deployment may succeed but app won’t open."
+  ],
+  "isFixRequest": true,
+  "existing_features": [
+    {
+      "id": "feature-add-a-repository-level-validation-step-that-checks-the-deployment-slug-in-frontend-deploy-custom-domain-json-meets-the-documented-domain-rules-5-50-chars-only-letters-numbers-and-hyphens-no-spaces-dots-special-characters-and-fails-the-build-deploy-workflow-with-a-clear-english-error-message-when-invalid",
+      "title": "Add a repository-level validation step that checks the deployment slug in `frontend/deploy/custom-domain.json` meets the documented domain rules (5–50 chars; only letters, numbers, and hyphens; no spaces/dots/special characters) and fails the build/deploy workflow with a clear English error message when invalid.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-improve-domain-setup-guidance-in-frontend-readme-md-by-adding-a-short-explicit-troubleshooting-section-explaining-that-using-a-domain-with-spaces-e-g-ai-master-may-result-in-a-deployment-that-succeeds-but-an-app-that-cannot-be-opened-and-instruct-users-to-use-a-dns-safe-slug-such-as-ai-master",
+      "title": "Improve domain setup guidance in `frontend/README.md` by adding a short, explicit troubleshooting section explaining that using a domain with spaces (e.g., \"Ai master\") may result in a deployment that succeeds but an app that cannot be opened, and instruct users to use a DNS-safe slug such as \"ai-master\".",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Validate and enforce domain naming rules (no spaces; allow letters/numbers/hyphens) and block/guide invalid domain inputs",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Improve domain setup UX: clearer prompt/confirmation when user selects a suggested valid domain and ensure it’s applied before build/deploy",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "projectName": "Enforce valid custom-domain slug rules and guide invalid domain inputs",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

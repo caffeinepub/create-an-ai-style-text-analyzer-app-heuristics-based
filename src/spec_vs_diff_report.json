@@ -1,0 +1,56 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-08T06:14:28.207Z",
+  "summary": "REQ-1 is partially implemented via a new Node validation script for the slug rules, but there is no clear evidence it is wired into a repository-level build/deploy workflow to automatically fail when invalid. REQ-2 README changes are suggested by the file summary, but the provided README diff content is truncated before any troubleshooting section, so the acceptance criteria cannot be fully verified from the shown snippet.",
+  "missing_requirements": [
+    {
+      "id": "REQ-1",
+      "requirement": "Add a repository-level validation step that checks the deployment slug in `frontend/deploy/custom-domain.json` meets the documented domain rules and fails the build/deploy workflow with a clear English error message when invalid.",
+      "reason": "A validator script was added, but the diff summary does not show it being invoked by any build/deploy workflow (e.g., package scripts, CI, predeploy hook). Without integration, the build/deploy may not fail automatically when the slug is invalid.",
+      "evidence": [
+        "frontend/deploy/validate-custom-domain-slug.mjs",
+        "frontend-file-summaries.txt (no referenced changes to package.json / CI config shown)"
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "requirement": "Improve domain setup guidance in `frontend/README.md` by adding a short troubleshooting section warning that spaces can cause deployments that succeed but the app cannot be opened, and show an example mapping like \"Ai master\" -> \"ai-master\" while still referencing `frontend/deploy/custom-domain.json` as source of truth.",
+      "reason": "The diff snippet for `frontend/README.md` is truncated before any troubleshooting section content appears, so the required troubleshooting text and example mapping cannot be confirmed from the provided excerpt alone.",
+      "evidence": [
+        "frontend/README.md (truncated in diff snippet)"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "Added an extra validation rule that the slug cannot start or end with a hyphen.",
+      "reason": "The BuildRequest’s documented rules only specify length (5–50) and allowed/disallowed characters (letters/numbers/hyphens; no spaces/dots/special characters). It does not request enforcing start/end hyphen constraints.",
+      "evidence": [
+        "frontend/deploy/validate-custom-domain-slug.mjs"
+      ]
+    },
+    {
+      "description": "Introduced emoji-heavy console output (e.g., ❌, ✅, 📋, 💡) in validation messages.",
+      "reason": "Not requested by the BuildRequest; also may conflict with the constraint to use English for user-facing text (at minimum, it adds non-English symbols to user-facing output).",
+      "evidence": [
+        "frontend/deploy/validate-custom-domain-slug.mjs"
+      ]
+    },
+    {
+      "description": "Updated/added project tracking metadata (`project_state.json`) and updated `frontend-file-summaries.txt`.",
+      "reason": "Not requested by the BuildRequest requirements (REQ-1/REQ-2).",
+      "evidence": [
+        "project_state.json",
+        "frontend-file-summaries.txt"
+      ]
+    }
+  ],
+  "confidence": 0.62,
+  "changed_files": [
+    "frontend-file-summaries.txt",
+    "frontend/README.md",
+    "frontend/deploy/validate-custom-domain-slug.mjs",
+    "project_state.json"
+  ]
+}

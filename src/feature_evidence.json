@@ -1,0 +1,44 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-add-a-repository-level-validation-step-that-checks-the-deployment-slug-in-frontend-deploy-custom-domain-json-meets-the-documented-domain-rules-5-50-chars-only-letters-numbers-and-hyphens-no-spaces-dots-special-characters-and-fails-the-build-deploy-workflow-with-a-clear-english-error-message-when-invalid",
+      "featureTitle": "Add a repository-level validation step that checks the deployment slug in `frontend/deploy/custom-domain.json` meets the documented domain rules (5–50 chars; only letters, numbers, and hyphens; no spaces/dots/special characters) and fails the build/deploy workflow with a clear English error message when invalid.",
+      "files": [
+        "frontend/README.md",
+        "frontend/deploy/validate-custom-domain-slug.mjs"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-improve-domain-setup-guidance-in-frontend-readme-md-by-adding-a-short-explicit-troubleshooting-section-explaining-that-using-a-domain-with-spaces-e-g-ai-master-may-result-in-a-deployment-that-succeeds-but-an-app-that-cannot-be-opened-and-instruct-users-to-use-a-dns-safe-slug-such-as-ai-master",
+      "featureTitle": "Improve domain setup guidance in `frontend/README.md` by adding a short, explicit troubleshooting section explaining that using a domain with spaces (e.g., \"Ai master\") may result in a deployment that succeeds but an app that cannot be opened, and instruct users to use a DNS-safe slug such as \"ai-master\".",
+      "files": [
+        "frontend/README.md"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

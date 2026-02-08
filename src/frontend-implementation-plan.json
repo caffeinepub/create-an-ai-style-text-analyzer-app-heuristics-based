@@ -1,0 +1,44 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Validate custom-domain slug and improve troubleshooting guidance",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Add a repo-level slug validation script that checks `frontend/deploy/custom-domain.json` and fails builds/deploys with a clear English error when invalid.",
+      "acceptanceCriteria": [
+        "If `frontend/deploy/custom-domain.json` contains a slug with spaces (e.g., \"ai master\"), the validation fails and reports an English error explaining allowed characters and length constraints.",
+        "If `frontend/deploy/custom-domain.json` contains a valid slug (e.g., \"ai-master\"), validation passes with no warnings.",
+        "The error message explicitly mentions: 5–50 characters; allowed: letters/numbers/hyphens; disallowed: spaces/dots/special characters."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/deploy/validate-custom-domain-slug.mjs",
+          "operation": "create",
+          "description": "Create a Node.js validation script that reads `frontend/deploy/custom-domain.json`, validates the `slug` against the documented rules (5–50 chars; only letters/numbers/hyphens; reject spaces/dots/special characters), and exits non-zero with a clear English error message containing those exact constraints when invalid."
+        },
+        {
+          "path": "frontend/README.md",
+          "operation": "modify",
+          "description": "Add a short section describing how to run the repository-level validation step (e.g., invoking `frontend/deploy/validate-custom-domain-slug.mjs`) as part of build/deploy so invalid slugs fail fast with the new English error message."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Add an explicit troubleshooting section to `frontend/README.md` warning that spaces in the domain slug can yield a deployment that succeeds but an app that won’t open, and show a DNS-safe example mapping.",
+      "acceptanceCriteria": [
+        "README includes a troubleshooting section that explicitly calls out spaces as invalid and provides an example mapping like \"Ai master\" -> \"ai-master\".",
+        "All added documentation text is in English.",
+        "README continues to reference `frontend/deploy/custom-domain.json` as the source of truth for the slug."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/README.md",
+          "operation": "modify",
+          "description": "Add an English troubleshooting section under the custom domain guidance explaining that slugs with spaces (example: \"Ai master\") can lead to a deploy that appears successful but produces an app that cannot be opened; instruct users to use a DNS-safe slug such as \"ai-master\" and keep `frontend/deploy/custom-domain.json` as the source of truth."
+        }
+      ]
+    }
+  ]
+}
